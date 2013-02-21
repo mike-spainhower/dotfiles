@@ -55,10 +55,10 @@ function parse_exit_code() {
 	[[ $1 != 0 ]] && echo ${BOLD}${GREEN}$1 $WHITE
 }
 
-function prompt_comamnd() {
+function prompt_command() {
 	local exit_code=$?
-	export PS1="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]at \[$ORANGE\]\h \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n\$(parse_exit_code $exit_code)\$ \[$RESET\]"
+	export PS1="\n\[${BOLD}${MAGENTA}\]\u \[$WHITE\]at \[$ORANGE\]\h \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n\$(parse_exit_code $exit_code)\$ \[$RESET\]"
 	export PS2="\[$ORANGE\]→ \[$RESET\]"
 }
 
-PROMPT_COMMAND=prompt_comamnd
+PROMPT_COMMAND=prompt_command
