@@ -51,5 +51,14 @@ function parse_git_branch() {
 	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
 }
 
-export PS1="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]at \[$ORANGE\]\h \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n\$ \[$RESET\]"
-export PS2="\[$ORANGE\]→ \[$RESET\]"
+function parse_exit_code() {
+	[[ $1 != 0 ]] && echo ${BOLD}${GREEN}$1 $WHITE
+}
+
+function prompt_comamnd() {
+	local exit_code=$?
+	export PS1="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]at \[$ORANGE\]\h \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n\$(parse_exit_code $exit_code)\$ \[$RESET\]"
+	export PS2="\[$ORANGE\]→ \[$RESET\]"
+}
+
+PROMPT_COMMAND=prompt_comamnd
