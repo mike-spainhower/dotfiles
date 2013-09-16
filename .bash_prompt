@@ -55,12 +55,12 @@ function parse_git_branch() {
 }
 
 function parse_exit_code() {
-	[[ $1 != 0 ]] && echo ${BOLD}${GREEN}$1 $WHITE
+	[[ $1 != 0 ]] && echo " $1 "
 }
 
 function prompt_command() {
 	local exit_code=$?
-	export PS1="\n\[${BOLD}${ORANGE}\]\u \[$WHITE\]at \[$BLUE\]\h \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n\$(parse_exit_code $exit_code)\$ \[$RESET\]"
+	export PS1="\n\[${BOLD}${ORANGE}\]\u \[$WHITE\]at \[$BLUE\]\h \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n\[${BOLD}${GREEN}\]\$(parse_exit_code $exit_code)\[$WHITE\]\$ \[$RESET\]"
 	export PS2="\[$ORANGE\]→ \[$RESET\]"
 }
 
