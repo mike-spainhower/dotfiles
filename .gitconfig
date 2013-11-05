@@ -25,17 +25,27 @@
 	reb = "!r() { git rebase -i HEAD~$1; }; r"
 	# Undo a `git push`
 	undopush = push -f origin HEAD^:master
+    # Add PR branches for GitHub-hosted repos (https://gist.github.com/piscisaureus/3342247)
+    pullify = config --add remote.origin.fetch '+refs/pull/*/head:refs/remotes/origin/pr/*'
+    # Checkout a GitHub PR (https://gist.github.com/gnarf/5406589)
+    pr = "!f() { git fetch -fu origin refs/pull/$1/head:pr/$1; } ; f"
+    # grab from remote, i.e. prr upstream 55
+    prr = "!f() { git fetch -fu $1 refs/pull/$2/head:pr/$2; } ; f"
+    # grab from "upstream" in case you have that branch name (pretty common)
+    pru = "!f() { git fetch -fu upstream refs/pull/$1/head:pr/$1; } ; f"
+    # delete pr/* branches
+    pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
 
 [apply]
 	# Detect whitespace errors when applying a patch
-	whitespace = fix
+    whitespace = fix
 
 [core]
 	# Use custom `.gitignore` and `.gitattributes`
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
 	# Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
-	whitespace = space-before-tab,indent-with-non-tab,trailing-space
+    whitespace = space-before-tab,indent-with-non-tab,trailing-space
 
 [color]
 	# Use colors in Git commands that are capable of colored output when outputting to the terminal
@@ -78,3 +88,6 @@
 
 [push]
 	default = simple
+[user]
+	email = michael.spainhower@opower.com
+	name = Spain Train
