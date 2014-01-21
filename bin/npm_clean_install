@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+echo "Removing ./node_modules..."
+rm -rf ./node_modules
+echo "./node_modules removed successfully"
+
+npm_link_install || npm install
+
+set +e

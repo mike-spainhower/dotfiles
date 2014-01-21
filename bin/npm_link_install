@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Linking taskmaster..."
+npm link x-web-taskmaster
+
+echo "npm installing..."
+npm install
