@@ -65,3 +65,5 @@ function prompt_command() {
 }
 
 PROMPT_COMMAND=prompt_command
+
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
