@@ -51,7 +51,7 @@ elif type compctl &>/dev/null; then
   compctl -K _npm_completion npm
 fi
 ###-end-npm-completion-###
-eval "$(grunt --completion=bash)"
+# eval "$(grunt --completion=bash)"
 
 export N_PREFIX=~/npm/n
 
