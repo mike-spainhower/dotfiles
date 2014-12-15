@@ -35,7 +35,10 @@ complete -W "NSGlobalDomain" defaults
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall
 
+# Add tab completion for aws CLI (if exists)
+if aws --version 2> /dev/null; then
+    complete -C aws_completer aws
+fi
+
 # If possible, add tab completion for many more commands
 [ -f /etc/bash_completion ] && source /etc/bash_completion
-
-alias ll='ls -al'
