@@ -24,3 +24,5 @@ filetype plugin indent on
 
 "filetype specific
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
+
+match Todo /\s\+$/
