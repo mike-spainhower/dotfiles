@@ -1,0 +1,10 @@
+
+TerminalWindow .notebook tab {
+    background-color: #CFCFCF;
+    color: white;
+}
+
+TerminalWindow .notebook tab:active {
+    background-color: #72DEAC;
+    color: white;
+}
